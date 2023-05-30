@@ -44,7 +44,7 @@ class Heap
     // TC = O(logn)
     void DeleteFromHeap()
     {
-        // B0aseCase: if there is no node in the heap to be deleted:
+        // BaseCase: if there is no node in the heap to be deleted:
         if(size == 0)
         {
             cout << "Nothing to delete" << endl;
@@ -62,7 +62,7 @@ class Heap
             // Finding right position for the current root node:
             int index = 1;
 
-            while(index <= size)
+            while(index < size)
             {
                 int leftChild = 2 * index;
                 int rightChild = 2 * index + 1;
@@ -73,7 +73,7 @@ class Heap
                     index = leftChild;
                 }
 
-                else if(rightChild < size && arr[index] < arr[rightChild])
+                if(rightChild < size && arr[index] < arr[rightChild])
                 {
                     swap(arr[index], arr[2*index]);
                     index = rightChild;
@@ -99,35 +99,9 @@ class Heap
     }
 };
 
-// TC = O(logn)
+// TC = O(logn)  --> this function takes O(logn) TC but overall building a heap from the array is O(n) TC
 void Heapify(int arr[], int size, int index)
 {
-    // int NodeIndex = index;
-    // int leftChild = 2 * index;
-    // int rightChild = 2 * index + 1;
-
-
-    // while(NodeIndex <= size)
-    // {
-    //     if(leftChild < size && arr[NodeIndex] < arr[leftChild])
-    //     {
-    //         swap(arr[NodeIndex], arr[leftChild]);
-    //         NodeIndex = leftChild;
-    //     }
-
-    //     else if(rightChild < size && arr[NodeIndex] < arr[rightChild])
-    //     {
-    //         swap(arr[NodeIndex], arr[rightChild]);
-    //         NodeIndex = rightChild;
-    //     }
-
-    //     else 
-    //     {
-    //         return;
-    //     }
-    // }
-
-
     // Recursive solution
     int largest = index;
     int leftChild = 2 * index;

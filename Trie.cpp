@@ -1,6 +1,9 @@
 #include<iostream>
 using namespace std;
 
+// TC - Insertion = O(l) where l is the lenght of the word
+//      Searching = O(l)
+
 class TrieNode
 {
     public:
@@ -61,10 +64,6 @@ class Trie
             insertCharacter(child, word.substr(1)); // word ke 1st index se substring
         }
 
-        void insertWord(string word)
-        {
-            insertCharacter(root, word);
-        }
 
         bool SearchCharacter(TrieNode* root, string word)
         {
@@ -88,9 +87,47 @@ class Trie
             return false;
         }
 
+        void DeleteWordBySearch(TrieNode* root, string word)
+        {
+            // Base Case:
+            if(word.length() == 0)
+            {
+                root -> isTerminal = false;
+                return;
+            }
+
+            int index = word[0] - 'A';
+
+            TrieNode* child;
+            
+            // Present:
+            if(root -> children[index] != NULL)
+            {
+                child = root -> children[index];
+            }
+
+            else
+            {
+                cout << "Word not found" << endl;
+                return;
+            } 
+
+            DeleteWordBySearch(child, word.substr(1));
+        }
+
+        void insertWord(string word)
+        {
+            insertCharacter(root, word);
+        }
+
         bool SeachWord(string word)
         {
             return SearchCharacter(root, word);
+        }
+
+        void DeleteWord(string word)
+        {
+            DeleteWordBySearch(root, word);
         }
 };
 
@@ -107,6 +144,9 @@ int main()
     cout << "Checking for the presence of the word in the trie: "<< t -> SeachWord("CAR") << endl;
     t -> insertWord("CAR");
     cout << "Checking for the presence of the word in the trie: "<< t -> SeachWord("CAR") << endl;
+
+    t -> DeleteWord("AJMAT");
+    cout << "Checking for the presence of the word in the trie: "<< t -> SeachWord("AJMAT") << endl;
 
 
     return 0;

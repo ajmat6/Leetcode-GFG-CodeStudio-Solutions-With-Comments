@@ -87,6 +87,7 @@ class Trie
             return false;
         }
 
+        // This will mark isTerminal as false and hence will give search as false but actually it is not deleteing it. It is still occupying the space.
         void DeleteWordBySearch(TrieNode* root, string word)
         {
             // Base Case:

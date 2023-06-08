@@ -3,6 +3,7 @@
 #include<list>
 using namespace std;
 
+// Creating a generic graph
 template< class T >
 class Graph
 {
@@ -57,4 +58,6 @@ int main()
     g.PrintAdjList();
 
     return 0;
+
+    
 }

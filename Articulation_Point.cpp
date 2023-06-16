@@ -5,6 +5,9 @@
 #include<utility> //headerfile for pair
 using namespace std;
 
+// TC = O(N+E)
+// SC = O(N+E)
+
 void dfs(int node, int& parent, int& timer, vector<int>& disc, vector<int>& low, unordered_map<int, bool>& isVisited, unordered_map<int, list<int>>& adj, vector<int>& ans)
 {
     isVisited[node] = true;
@@ -15,12 +18,14 @@ void dfs(int node, int& parent, int& timer, vector<int>& disc, vector<int>& low,
 
     for(auto neighbour: adj[node])
     {
+        // if adjacent node of a node is its parent -> ignore:
         if(neighbour == parent) continue;
 
         if(!isVisited[neighbour])
         {
             dfs(neighbour, node, timer, disc, low, isVisited, adj, ans);
 
+            // updating the low of the parent after the recursion:
             low[node] = min(low[node], low[neighbour]);
 
             // Check for articulation point:
